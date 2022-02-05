@@ -1,0 +1,33 @@
+name:                jobworker
+version:             0.1.0
+github:              "matsubara0507/jobworker.hs"
+license:             BSD3
+author:              "MATSUBARA Nobutada"
+maintainer:          "nobutada0507@gmail.com"
+copyright:           "2022 MATSUBARA Nobutada"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+description:         Please see the README on GitHub at <https://github.com/matsubara0507/jobworker.hs#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  jobworker-exe:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+    - jobworker
+
+tests:
+  jobworker-test:
+    main:                Spec.hs
+    source-dirs:         test
+    dependencies:
+    - jobworker
