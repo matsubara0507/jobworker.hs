@@ -12,16 +12,44 @@ extra-source-files:
 
 description:         Please see the README on GitHub at <https://github.com/matsubara0507/jobworker.hs#readme>
 
+ghc-options:
+- -Wall
+- -Wcompat
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wredundant-constraints
+- -optP-Wno-nonportable-include-path
+
+default-extensions:
+- GHC2021
+- DataKinds
+- NoFieldSelectors
+- OverloadedRecordDot
+- OverloadedStrings
+
 dependencies:
+- aeson
 - base >= 4.7 && < 5
+- containers
+- websockets
+- servant-server
+- servant-websockets
+- stm
+- text
 
 library:
   source-dirs: src
 
 executables:
-  jobworker-exe:
+  jobworker:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         app/server
+    dependencies:
+    - jobworker
+    - warp
+  jobworker-runner:
+    main:                Main.hs
+    source-dirs:         app/runner
     dependencies:
     - jobworker
 

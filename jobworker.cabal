@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           jobworker
-version:        0.1.0.0
+version:        0.1.0
 description:    Please see the README on GitHub at <https://github.com/matsubara0507/jobworker.hs#readme>
 homepage:       https://github.com/matsubara0507/jobworker.hs#readme
 bug-reports:    https://github.com/matsubara0507/jobworker.hs/issues
@@ -25,24 +25,81 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      JobWorker.Client
+      JobWorker.DB
+      JobWorker.Server
+      JobWorker.Worker
   other-modules:
       Paths_jobworker
   hs-source-dirs:
       src
+  default-extensions:
+      GHC2021
+      DataKinds
+      NoFieldSelectors
+      OverloadedRecordDot
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -optP-Wno-nonportable-include-path
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , containers
+    , servant-server
+    , servant-websockets
+    , stm
+    , text
+    , websockets
   default-language: Haskell2010
 
-executable jobworker-exe
+executable jobworker
   main-is: Main.hs
   other-modules:
       Paths_jobworker
   hs-source-dirs:
-      app
+      app/server
+  default-extensions:
+      GHC2021
+      DataKinds
+      NoFieldSelectors
+      OverloadedRecordDot
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -optP-Wno-nonportable-include-path
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , containers
     , jobworker
+    , servant-server
+    , servant-websockets
+    , stm
+    , text
+    , warp
+    , websockets
+  default-language: Haskell2010
+
+executable jobworker-runner
+  main-is: Main.hs
+  other-modules:
+      Paths_jobworker
+  hs-source-dirs:
+      app/runner
+  default-extensions:
+      GHC2021
+      DataKinds
+      NoFieldSelectors
+      OverloadedRecordDot
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -optP-Wno-nonportable-include-path
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , containers
+    , jobworker
+    , servant-server
+    , servant-websockets
+    , stm
+    , text
+    , websockets
   default-language: Haskell2010
 
 test-suite jobworker-test
@@ -52,7 +109,21 @@ test-suite jobworker-test
       Paths_jobworker
   hs-source-dirs:
       test
+  default-extensions:
+      GHC2021
+      DataKinds
+      NoFieldSelectors
+      OverloadedRecordDot
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -optP-Wno-nonportable-include-path
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , containers
     , jobworker
+    , servant-server
+    , servant-websockets
+    , stm
+    , text
+    , websockets
   default-language: Haskell2010
