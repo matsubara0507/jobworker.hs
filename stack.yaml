@@ -143,3 +143,7 @@ extra-deps:
 flags:
   transformers-compat:
     five-three: true
+
+docker:
+  repo: ghcr.io/matsubara0507/stack-build:18.04
+  enable: false

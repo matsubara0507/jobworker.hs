@@ -1,0 +1,16 @@
+services:
+  server:
+    image: ghcr.io/matsubara0507/jobworker:latest
+    deploy:
+      replicas: 1
+    command: [--port, "8080"]
+    ports:
+      - 8080:8080
+
+  runner:
+    image: ghcr.io/matsubara0507/jobworker-runner:latest
+    deploy:
+      replicas: 3
+    depends_on:
+      - server
+    command: [server:8080/runner]
