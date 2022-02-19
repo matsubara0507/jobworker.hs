@@ -5,11 +5,13 @@
 module JobWorker.Worker where
 
 import           Data.Aeson         (FromJSON, ToJSON)
+import           Data.Binary        (Binary)
+import           Data.Int           (Int32)
 import           GHC.Generics       (Generic)
 import qualified Network.WebSockets as WS
 
-newtype Id = Id Int
-  deriving newtype (Show, Eq, Ord, FromJSON, ToJSON)
+newtype Id = Id Int32
+  deriving newtype (Show, Eq, Ord, Num, Binary, FromJSON, ToJSON)
 
 data Worker = Worker
   { id      :: Id
@@ -19,6 +21,10 @@ data Worker = Worker
 
 new :: Id -> WS.Connection -> Worker
 new wid conn = Worker wid conn False
+
+work, finish :: Worker -> Worker
+work w = w { working = True }
+finish w = w { working = False }
 
 data Info = Info
   { id      :: Id

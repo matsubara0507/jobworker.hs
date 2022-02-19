@@ -27,6 +27,8 @@ library
   exposed-modules:
       JobWorker.Client
       JobWorker.DB
+      JobWorker.Job
+      JobWorker.Protocol
       JobWorker.Server
       JobWorker.Worker
   other-modules:
@@ -43,12 +45,17 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , binary
+    , bytestring
     , containers
+    , http-api-data
+    , random
     , servant-server
     , servant-websockets
     , stm
     , text
     , websockets
+    , yaml
   default-language: Haskell2010
 
 executable jobworker
@@ -67,14 +74,19 @@ executable jobworker
   build-depends:
       aeson
     , base >=4.7 && <5
+    , binary
+    , bytestring
     , containers
+    , http-api-data
     , jobworker
+    , random
     , servant-server
     , servant-websockets
     , stm
     , text
     , warp
     , websockets
+    , yaml
   default-language: Haskell2010
 
 executable jobworker-runner
@@ -93,13 +105,18 @@ executable jobworker-runner
   build-depends:
       aeson
     , base >=4.7 && <5
+    , binary
+    , bytestring
     , containers
+    , http-api-data
     , jobworker
+    , random
     , servant-server
     , servant-websockets
     , stm
     , text
     , websockets
+    , yaml
   default-language: Haskell2010
 
 test-suite jobworker-test
@@ -119,11 +136,16 @@ test-suite jobworker-test
   build-depends:
       aeson
     , base >=4.7 && <5
+    , binary
+    , bytestring
     , containers
+    , http-api-data
     , jobworker
+    , random
     , servant-server
     , servant-websockets
     , stm
     , text
     , websockets
+    , yaml
   default-language: Haskell2010

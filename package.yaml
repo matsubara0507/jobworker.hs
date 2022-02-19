@@ -30,12 +30,17 @@ default-extensions:
 dependencies:
 - aeson
 - base >= 4.7 && < 5
+- binary
+- bytestring
 - containers
-- websockets
+- http-api-data
+- random
 - servant-server
 - servant-websockets
 - stm
 - text
+- websockets
+- yaml
 
 library:
   source-dirs: src

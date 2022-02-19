@@ -59,6 +59,20 @@ packages:
   original:
     hackage: websockets-0.12.7.3@sha256:c4133af18fb420527b30507a69ff20d6819b79f02643051f1ed97aba0468846c,7976
 - completed:
+    hackage: yaml-0.11.7.0@sha256:bdc72a1f2eb7adc85d3dc8ff8b19d82319d3a4f2dd6847d1d161071cab6390c2,4936
+    pantry-tree:
+      size: 2044
+      sha256: 78740da227b412af7f63fbf277e47ea22a797e8ce18912d5450f9e88376b49ba
+  original:
+    hackage: yaml-0.11.7.0@sha256:bdc72a1f2eb7adc85d3dc8ff8b19d82319d3a4f2dd6847d1d161071cab6390c2,4936
+- completed:
+    hackage: libyaml-0.1.2@sha256:7f14f69ceb14659699974e8e47e1ea6f226ea21ff42a802db03e721c319d201d,2125
+    pantry-tree:
+      size: 1096
+      sha256: 7d03826965c52ffef8ce22179a1c0211e4cafb5f73f2a723169ef14b3677e262
+  original:
+    hackage: libyaml-0.1.2@sha256:7f14f69ceb14659699974e8e47e1ea6f226ea21ff42a802db03e721c319d201d,2125
+- completed:
     hackage: SHA-1.6.4.4@sha256:3b7523df3e2186ae8c5ac78c745efb586814afe9c775b886a747556d9f4d429c,4920
     pantry-tree:
       size: 326

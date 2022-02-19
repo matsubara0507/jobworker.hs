@@ -7,6 +7,7 @@ import           Paths_jobworker          (version)
 
 import           Control.Monad            (when)
 import qualified Data.Version             as Version
+import qualified Data.Yaml                as YAML
 import qualified JobWorker.DB             as JobWorkerDB
 import qualified JobWorker.Server         as JobWorker
 import qualified Network.Wai.Handler.Warp as Warp
@@ -17,23 +18,23 @@ import           Text.Read                (readMaybe)
 
 main :: IO ()
 main = do
-  opts <- compilerOpts usage =<< getArgs
+  (opts, path) <- compilerOpts usage =<< getArgs
   if
     | opts.help    -> putStrLn usage
     | opts.version -> putStrLn $ Version.showVersion version
-    | otherwise    -> runServer opts
+    | otherwise    -> runServer opts path
   where
-    usage = usageInfo "Usage: jobworker [OPTION...]" options
+    usage = usageInfo "Usage: jobworker [OPTION...] FILE_PATH" options
 
-runServer :: Options -> IO ()
-runServer opts = do
+runServer :: Options -> FilePath -> IO ()
+runServer opts path = do
+  jobConfigs <- YAML.decodeFileThrow path
   db <- JobWorkerDB.new
+  let config = JobWorker.Config opts.verbose jobConfigs
   when opts.verbose $
     putStrLn ("Listening on port " ++ show opts.port)
   Warp.run opts.port $
     serve JobWorker.api (JobWorker.server config db)
-  where
-    config = JobWorker.Config opts.verbose
 
 data Options = Options
   { help    :: Bool
@@ -66,8 +67,9 @@ options =
       "Port for server (default is 8080)"
   ]
 
-compilerOpts :: String -> [String] -> IO Options
+compilerOpts :: String -> [String] -> IO (Options, FilePath)
 compilerOpts usage argv =
   case getOpt Permute options argv of
-    (o, _, []  ) -> pure $ foldl (flip id) defaultOptions o
+    (o, p:_, []) -> pure (foldl (flip id) defaultOptions o, p)
+    (_, _, [])   -> ioError $ userError ("Please set FILE_PATH for job config\n" ++ usage)
     (_, _, errs) -> ioError $ userError (concat errs ++ usage)

@@ -3,7 +3,9 @@ services:
     image: ghcr.io/matsubara0507/jobworker:latest
     deploy:
       replicas: 1
-    command: [--port, "8080"]
+    command: [--verbose, --port, "8080", "/var/jobs.yaml"]
+    volumes:
+      - ./jobs.yaml:/var/jobs.yaml
     ports:
       - 8080:8080
 
@@ -13,4 +15,4 @@ services:
       replicas: 3
     depends_on:
       - server
-    command: [server:8080/runner]
+    command: [--verbose, server:8080/runner]
