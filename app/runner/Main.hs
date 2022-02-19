@@ -24,8 +24,9 @@ main = do
 runClient :: Options -> Maybe String -> IO ()
 runClient _ Nothing =
   ioError $ userError "please input DESTINATION"
-runClient opts (Just dest) =
-  case JobWorkerClient.new dest opts.verbose of
+runClient opts (Just dest) = do
+  c <- JobWorkerClient.new dest opts.verbose
+  case c of
     Just client -> JobWorkerClient.run client
     Nothing     -> ioError $ userError "parse DESTINATION error"
 

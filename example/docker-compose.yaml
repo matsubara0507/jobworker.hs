@@ -15,4 +15,6 @@ services:
       replicas: 3
     depends_on:
       - server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     command: [--verbose, server:8080/runner]
