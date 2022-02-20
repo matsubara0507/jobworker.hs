@@ -2,7 +2,7 @@ module JobWorker.Server where
 
 import           Control.Exception      (finally)
 import           Control.Monad          (forever, when)
-import           Control.Monad.IO.Class (MonadIO, liftIO)
+import           Control.Monad.IO.Class (liftIO)
 import qualified Data.List              as List
 import           JobWorker.DB           as DB
 import           JobWorker.Job          (Job)
@@ -34,7 +34,7 @@ type JobAPI
 
 server :: Config -> DB -> Server API
 server config db
-  = (getWorkers :<|> getJobs :<|> kickJob) :<|> serveRunner config db
+  = (getWorkers :<|> getJobs :<|> kickJob) :<|> (liftIO . serveRunner config db)
   where
     getWorkers = liftIO $ DB.getAllWorkerInfo db
     getJobs = liftIO $ DB.getAllJob db
@@ -52,15 +52,14 @@ server config db
               WS.sendBinaryData worker.conn (Protocol.Enqueue job.id job.name)
               pure job
 
-serveRunner :: MonadIO m => Config -> DB -> WS.Connection -> m ()
-serveRunner config db conn =
-  liftIO $ WS.withPingThread conn 30 (logDebug config "ping") $ do
-    worker <- DB.connectedWorker db conn
-    logDebug config $ "Connected worker " ++ show worker.id
-    WS.sendBinaryData worker.conn (Protocol.JobConfigs config.job)
-    logDebug config $ "Setuped worker " ++ show worker.id
-    _ <- forever (receive worker) `finally` DB.disconnectedWorker db worker.id
-    logDebug config $ "Close worker " ++ show worker.id
+serveRunner :: Config -> DB -> WS.Connection -> IO ()
+serveRunner config db conn = do
+  worker <- DB.connectedWorker db conn
+  logDebug config $ "Connected worker " ++ show worker.id
+  WS.sendBinaryData worker.conn (Protocol.JobConfigs config.job)
+  logDebug config $ "Setuped worker " ++ show worker.id
+  _ <- forever (receive worker) `finally` DB.disconnectedWorker db worker.id
+  logDebug config $ "Close worker " ++ show worker.id
   where
     receive worker = do
       p <- WS.receiveData worker.conn

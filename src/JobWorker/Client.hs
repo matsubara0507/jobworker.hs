@@ -40,10 +40,13 @@ new dest verbose =
 run :: Client -> IO ()
 run client = do
   logDebug client $ "Connecting to " ++ toDestination client
-  WS.runClient client.host client.port client.path $ \conn -> do
-    logDebug client $ "Connected to " ++ toDestination client
-    _ <- forkIO $ forever (runJob conn client)
-    forever (receive conn client) `finally` logDebug client "Close worker"
+  WS.runClientWith client.host client.port client.path opt [] $ \conn ->
+    WS.withPingThread conn 30 (logDebug client "Ping") $ do
+      logDebug client $ "Connected to " ++ toDestination client
+      _ <- forkIO $ forever (runJob conn client)
+      forever (receive conn client) `finally` logDebug client "Close worker"
+  where
+    opt = WS.defaultConnectionOptions { WS.connectionOnPong = logDebug client "Pong" }
 
 receive :: WS.Connection -> Client -> IO ()
 receive conn client = do
