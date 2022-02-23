@@ -34,6 +34,7 @@ dependencies:
 - bytestring
 - containers
 - http-api-data
+- process
 - random
 - servant-server
 - servant-websockets

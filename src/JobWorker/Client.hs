@@ -2,15 +2,18 @@
 
 module JobWorker.Client where
 
-import           Control.Concurrent     (forkIO, threadDelay)
+import           Control.Concurrent     (forkIO)
 import qualified Control.Concurrent.STM as STM
 import           Control.Exception      (finally)
 import           Control.Monad          (forever, when)
+import           Data.Coerce            (coerce)
 import qualified Data.List              as List
+import qualified JobWorker.Docker       as Docker
 import           JobWorker.Job          (Job)
 import qualified JobWorker.Job          as Job
 import qualified JobWorker.Protocol     as Protocol
 import qualified Network.WebSockets     as WS
+import           System.Exit            (ExitCode (..))
 import           System.IO              (hFlush, stdout)
 import           Text.Read              (readMaybe)
 
@@ -66,11 +69,19 @@ runJob conn client = do
   case List.find (\config -> config.name == job.name) configs of
     Nothing ->
       WS.sendBinaryData conn (Protocol.JobFailure job.id)
-    Just _ -> do
+    Just config -> do
       WS.sendBinaryData conn (Protocol.JobRunning job.id)
-      logDebug client "ToDo: run"
-      threadDelay 10_000_000
-      WS.sendBinaryData conn (Protocol.JobSuccess job.id)
+      logDebug client $ "Run: " ++ coerce config.name
+      (code, out, err) <- Docker.run config
+      when (not $ null out) $ do
+        logDebug client $ "=== STDOUT ===\n" ++ out
+      when (not $ null err) $ do
+        logDebug client $ "=== STDERR ===\n" ++ err
+      case code of
+        ExitSuccess ->
+          WS.sendBinaryData conn (Protocol.JobSuccess job.id)
+        ExitFailure _ ->
+          WS.sendBinaryData conn (Protocol.JobFailure job.id)
 
 toDestination :: Client -> String
 toDestination client =
