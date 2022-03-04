@@ -33,8 +33,11 @@ runServer opts path = do
   let config = JobWorker.Config opts.verbose jobConfigs
   when opts.verbose $
     putStrLn ("Listening on port " ++ show opts.port)
-  Warp.run opts.port $
+  Warp.runSettings settings $
     serve JobWorker.api (JobWorker.server config db)
+  where
+    settings =
+      Warp.setPort opts.port $ Warp.setTimeout 60 Warp.defaultSettings
 
 data Options = Options
   { help    :: Bool
