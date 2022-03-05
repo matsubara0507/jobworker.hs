@@ -10,7 +10,7 @@ import qualified Network.WebSockets   as WS
 data Server
   = JobConfigs [Job.Config]
   | Enqueue Job.Id Job.Name
-  | SUndefined LBS.ByteString
+  | SUndefined
 
 instance WS.WebSocketsData Server where
   fromDataMessage (WS.Text   bl _) = WS.fromLazyByteString bl
@@ -22,13 +22,13 @@ instance WS.WebSocketsData Server where
         Just configs ->
           JobConfigs configs
         Nothing ->
-          SUndefined lbs
+          SUndefined
 
     Just (2, rest) ->
       uncurry Enqueue (Binary.decode rest)
 
     _ ->
-      SUndefined lbs
+      SUndefined
 
   toLazyByteString p = case p of
     JobConfigs configs ->
@@ -37,15 +37,15 @@ instance WS.WebSocketsData Server where
     Enqueue wid name ->
       LBS.cons 2 (Binary.encode (wid, name))
 
-    SUndefined lbs ->
-      lbs
+    SUndefined ->
+      ""
 
 -- | protocol from Client to Server
 data Client
   = JobRunning Job.Id
   | JobSuccess Job.Id
   | JobFailure Job.Id
-  | CUndefined LBS.ByteString
+  | CUndefined
 
 instance WS.WebSocketsData Client where
   fromDataMessage (WS.Text   bl _) = WS.fromLazyByteString bl
@@ -62,7 +62,7 @@ instance WS.WebSocketsData Client where
       JobFailure (Binary.decode rest)
 
     _ ->
-      CUndefined lbs
+      CUndefined
 
   toLazyByteString p = case p of
     JobRunning wid ->
@@ -74,5 +74,5 @@ instance WS.WebSocketsData Client where
     JobFailure wid ->
       LBS.cons 3 (Binary.encode wid)
 
-    CUndefined lbs ->
-      lbs
+    CUndefined ->
+      ""
