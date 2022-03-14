@@ -290,16 +290,12 @@ packages:
   original:
     hackage: bsb-http-chunked-0.0.0.4@sha256:add530e695ea3058bf4f7156a1ca85653ff3635b87ec6d1be8c4891645190f96,2678
 - completed:
-    size: 638902
-    url: https://github.com/haskell-crypto/cryptonite/archive/3b081e3ad027b0550fc87f171dffecbb20dedafe.tar.gz
-    name: cryptonite
-    version: '0.29'
-    sha256: 9ac43c0194562b624475cb99f3568779baadcf6ae652a03c815a838a5d31b0eb
+    hackage: cryptonite-0.30@sha256:12c85dea7be63e5ad90bcb487eb3846bf3c413347f94336fa1dede7b28f9936a,18301
     pantry-tree:
-      size: 24851
-      sha256: 139a1368d5e64f673ce60e5ae008e61fd9fed7f1d3acc9cd9e0bc6cca8278cff
+      size: 23323
+      sha256: df1cbe4cc40d569cc75ffed40bc5deac43cb085653980b42b9b6a5d4b745a30a
   original:
-    url: https://github.com/haskell-crypto/cryptonite/archive/3b081e3ad027b0550fc87f171dffecbb20dedafe.tar.gz
+    hackage: cryptonite-0.30@sha256:12c85dea7be63e5ad90bcb487eb3846bf3c413347f94336fa1dede7b28f9936a,18301
 - completed:
     hackage: hashable-1.4.0.2@sha256:0cddd0229d1aac305ea0404409c0bbfab81f075817bd74b8b2929eff58333e55,5005
     pantry-tree:
@@ -329,16 +325,12 @@ packages:
   original:
     hackage: iproute-1.7.12@sha256:85d181599fab8ceebf4c849110ad571bea2834d6c8c95ae7da33856c42453f40,2999
 - completed:
-    size: 44894
-    url: https://github.com/vincenthz/hs-memory/archive/3cf661a8a9a8ac028df77daa88e8d65c55a3347a.tar.gz
-    name: memory
-    version: 0.16.0
-    sha256: dbfa72fc4aef871725254e0365cdd6589277440bc1f2c20df08d3ea24600dc13
+    hackage: memory-0.17.0@sha256:c8809b0b3026193c813a88c1f626758c923fae7e0b0d6b96b91c6ce5e14173ec,4468
     pantry-tree:
-      size: 2819
-      sha256: 0edf661bab420ffb43689afbb649cb69d49fc817c0f20007767da9b60cb6657e
+      size: 2436
+      sha256: d63a3ac4e57e9b9288209eb4b01bc348309c6966f3e3ed5e9952f0803f78eb65
   original:
-    url: https://github.com/vincenthz/hs-memory/archive/3cf661a8a9a8ac028df77daa88e8d65c55a3347a.tar.gz
+    hackage: memory-0.17.0@sha256:c8809b0b3026193c813a88c1f626758c923fae7e0b0d6b96b91c6ce5e14173ec,4468
 - completed:
     hackage: mime-types-0.1.0.9@sha256:d631fe56daed713ec7798933aaa1429dc9912d85375619aa6e25a0fefe8e95e7,826
     pantry-tree:
@@ -571,18 +563,12 @@ packages:
   original:
     hackage: asn1-types-0.3.4@sha256:8e879b3a5bbdd0031232eb84d904b5a3a2c20a18847692b996d774f4ff811355,1025
 - completed:
-    size: 306459
-    subdir: basement
-    url: https://github.com/haskell-foundation/foundation/archive/0bb195e1fea06d144dafc5af9a0ff79af0a5f4a0.tar.gz
-    name: basement
-    version: 0.0.12
-    sha256: 8dc96f5dc1b42c907e5fedf5b78c2f7c0b0ea1edb40e506bfc99cbfdda0d3539
+    hackage: basement-0.0.14@sha256:d28a94225234a9895abbf88cdbf171fdea8cb478d718479f06522238b2cc7e74,5403
     pantry-tree:
-      size: 5928
-      sha256: 5f1af5468f8271a286b006226858c0ab76bb2447e9cbe7e7cbadffeab4a59fd4
+      size: 5799
+      sha256: 4704628ec7f2931fbb576a1212ebe4050de32f5d12c150a52d370be0a1df4554
   original:
-    subdir: basement
-    url: https://github.com/haskell-foundation/foundation/archive/0bb195e1fea06d144dafc5af9a0ff79af0a5f4a0.tar.gz
+    hackage: basement-0.0.14@sha256:d28a94225234a9895abbf88cdbf171fdea8cb478d718479f06522238b2cc7e74,5403
 - completed:
     hackage: blaze-builder-0.4.2.2@sha256:f0017df374c330de0ebe0eb15eae8c48427bddefa1d81a3cb31c0a4812ecdb08,3685
     pantry-tree:

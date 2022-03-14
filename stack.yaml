@@ -1,4 +1,4 @@
-resolver: ghc-9.2
+resolver: ghc-9.2.2
 packages:
 - .
 extra-deps:
@@ -45,16 +45,12 @@ extra-deps:
 - blaze-html-0.9.1.2@sha256:49db3eb70fa93fb572f3a9233b542b59e7f766a2b95c92d01d95a596c7727473,3048
 - blaze-markup-0.8.2.8@sha256:d9d57379f5d8cdb5f6cdfba8f373cd9e5a5245a7cf9cf06496f8171a0c7ff8ab,2413
 - bsb-http-chunked-0.0.0.4@sha256:add530e695ea3058bf4f7156a1ca85653ff3635b87ec6d1be8c4891645190f96,2678
-# - cryptonite-0.29@sha256:147724f6a8e4394fcbd51bf52aba7a8b92d3fc8f42055cd6ca9486655e2ab614,18312
-- github: haskell-crypto/cryptonite
-  commit: 3b081e3ad027b0550fc87f171dffecbb20dedafe # https://github.com/haskell-crypto/cryptonite/pull/354
+- cryptonite-0.30@sha256:12c85dea7be63e5ad90bcb487eb3846bf3c413347f94336fa1dede7b28f9936a,18301
 - hashable-1.4.0.2@sha256:0cddd0229d1aac305ea0404409c0bbfab81f075817bd74b8b2929eff58333e55,5005
 - http-date-0.0.11@sha256:b278b07f880705e3b0b073206ad26954548b666d616733c9a6b5d50993f547d4,1758
 - http2-3.0.2@sha256:7ef3389c98243da89960dc5b874d20d56c335f4319ee040cda7eea2d4ded308f,15814
 - iproute-1.7.12@sha256:85d181599fab8ceebf4c849110ad571bea2834d6c8c95ae7da33856c42453f40,2999
-# - memory-0.16.0@sha256:fea26d1d3cd954d66c9103de6c5fbf80454560889ee8de54d368fa9d1b01140b,5064
-- github: vincenthz/hs-memory
-  commit: 3cf661a8a9a8ac028df77daa88e8d65c55a3347a #https://github.com/vincenthz/hs-memory/pull/87
+- memory-0.17.0@sha256:c8809b0b3026193c813a88c1f626758c923fae7e0b0d6b96b91c6ce5e14173ec,4468
 - mime-types-0.1.0.9@sha256:d631fe56daed713ec7798933aaa1429dc9912d85375619aa6e25a0fefe8e95e7,826
 - old-locale-1.0.0.7@sha256:fa998be2c7e00cd26a6e9075bea790caaf3932caa3e9497ad69bc20380dd6911,1071
 - optparse-applicative-0.16.1.0@sha256:418c22ed6a19124d457d96bc66bd22c93ac22fad0c7100fe4972bbb4ac989731,4982
@@ -90,11 +86,7 @@ extra-deps:
 - asn1-encoding-0.9.6@sha256:27ed8f6043aed79630313bb931f7c8e2b510f0b4586cd55c16ae040c7d1ea098,2060
 - asn1-parse-0.9.5@sha256:77c0126d63070df2d82cb4cfa4febb26c4e280f6d854bc778c2fa4d80ce692b8,976
 - asn1-types-0.3.4@sha256:8e879b3a5bbdd0031232eb84d904b5a3a2c20a18847692b996d774f4ff811355,1025
-# - basement-0.0.12@sha256:cbb9187d3575b78ee1165b7a49a0e8570ee563820330a944a67cd09e1cfe23bf,5516
-- github: haskell-foundation/foundation
-  commit: 0bb195e1fea06d144dafc5af9a0ff79af0a5f4a0 # https://github.com/haskell-foundation/foundation/pull/555
-  subdirs:
-  - basement
+- basement-0.0.14@sha256:d28a94225234a9895abbf88cdbf171fdea8cb478d718479f06522238b2cc7e74,5403
 - blaze-builder-0.4.2.2@sha256:f0017df374c330de0ebe0eb15eae8c48427bddefa1d81a3cb31c0a4812ecdb08,3685
 - byteorder-1.0.4@sha256:a952817dcbe20af0346fb55a28c13e95e2ddbf3e99f9b4fffdc063f150f13b20,636
 - call-stack-0.4.0@sha256:ac44d2c00931dc20b01750da8c92ec443eb63a7231e8550188cb2ac2385f7feb,1200
